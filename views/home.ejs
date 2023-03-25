@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Hospital Management System</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<style>
+		body {
+			margin-top: 50px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h1 class="text-center mb-4">Hospital Management System</h1>
+
+		<form class="mb-4" method="POST" action="/">
+			<div class="form-group">
+				<label for="name">Name</label>
+				<input type="text" class="form-control" name="name" placeholder="Enter patient name" required>
+			</div>
+			<div class="form-group">
+				<label for="number">Phone Number</label>
+				<input type="tel" class="form-control" name="number" placeholder="Enter phone number" pattern="[0-9]{10}" required>
+			</div>
+			<div class="form-group">
+				<label for="dob">Date of Birth</label>
+				<input type="date" class="form-control" name="dob" required>
+			</div>
+			<div class="form-group">
+				<label for="city">City</label>
+				<input type="text" class="form-control" name="city" placeholder="Enter city name" required>
+			</div>
+			<button type="submit" class="btn btn-primary">Admit Patient</button>
+		</form>
+
+		<% if (data.length > 0) { %>
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Room No.</th>
+							<th>Name</th>
+							<th>Phone Number</th>
+							<th>Date of Birth</th>
+							<th>City</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<% data.forEach(patient => { %>
+							<tr>
+								<td><%= patient.roomNo %></td>
+								<td><%= patient.name %></td>
+								<td><%= patient.number %></td>
+								<td><%= patient.dob %></td>
+								<td><%= patient.city %></td>
+								<td>
+									<form method="POST" action="/discharge">
+										<input type="hidden" name="name" value="<%= patient.name %>">
+										<button type="submit" class="btn btn-danger btn-sm">Discharge</button>
+									</form>
+								</td>
+							</tr>
+						<% }) %>
+					</tbody>
+				</table>
+			</div>
+		<% } else { %>
+			<p>No patients admitted yet.</p>
+		<% } %>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>
