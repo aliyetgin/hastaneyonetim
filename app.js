@@ -3,6 +3,16 @@ const app = express()
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
+// Define user schema
+const userSchema = new mongoose.Schema({
+	username: String,
+	password: String,
+	role: String
+});
+
+// Define user model
+const User = mongoose.model('User', userSchema);
+
 // Define patient schema
 const patientSchema = new mongoose.Schema({
 	name: String,
@@ -89,6 +99,29 @@ app.post('/discharge', async (req, res) => {
 		res.send("An error occurred while discharging the patient");
 	}
 })
+
+app.get('/login', (req, res) => {
+	res.render('login', { message: '' });
+});
+
+app.post('/login', async (req, res) => {
+	const username = req.body.username;
+	const password = req.body.password;
+
+	const user = await User.findOne({ username: username, password: password });
+	if (!user) {
+		res.send('Invalid username or password');
+	} else {
+		req.session.userType = user.userType;
+		res.redirect('/');
+	}
+});
+
+// Logout route
+app.get('/logout', (req, res) => {
+	req.session.destroy();
+	res.redirect('/');
+});
 
 app.listen(3000, () => {
 	console.log("App is running on port 3000")
