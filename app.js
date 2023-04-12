@@ -1,128 +1,96 @@
-const express = require('express')
-const app = express()
-const bodyParser = require('body-parser')
-const mongoose = require('mongoose')
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
-// Define user schema
-const userSchema = new mongoose.Schema({
-	username: String,
-	password: String,
-	role: String
-});
-
-// Define user model
-const User = mongoose.model('User', userSchema);
-
-// Define patient schema
-const patientSchema = new mongoose.Schema({
-	name: String,
-	number: String,
-	dob: String,
-	city: String,
-	roomNo: Number
-});
-
-// Define patient model
-const Patient = mongoose.model('Patient', patientSchema);
+const User = require('./models/user');
+const Patient = require('./models/patient');
 
 const availableBeds = 2;
 
 mongoose.set('strictQuery', true);
 
 async function main() {
-	await mongoose.connect('mongodb://localhost:27017/hospital', {
-		useNewUrlParser: true,
-		useUnifiedTopology: true
-	});
-	console.log("Connection Open")
+  try {
+    await mongoose.connect('mongodb://localhost:27017/hospital', {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
+    console.log("Connection Open");
+  } catch (err) {
+    console.log(err);
+  }
 }
 
-main().catch(err => console.log(err));
+main();
 
 app.set('view engine', 'ejs');
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(`${__dirname}/public`));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-	extended: true
-}))
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get("/", async function (req, res) {
-	try {
-		const patients = await Patient.find();
-		res.render("home", {
-			data: patients
-		})
-	} catch (err) {
-		console.log(err);
-		res.send("An error occurred while fetching patients");
-	}
-})
+app.get('/', async (req, res) => {
+  try {
+    const patients = await Patient.find();
+    res.render('home', { data: patients });
+  } catch (err) {
+    console.log(err);
+    res.send('An error occurred while fetching patients');
+  }
+});
 
-app.post("/", async (req, res) => {
-	const name = req.body.name;
-	const number = req.body.number;
-	const dob = req.body.dob;
-	const city = req.body.city;
-	if (await Patient.countDocuments() < availableBeds) {
-		const roomNo = await Patient.countDocuments() + 1;
+app.post('/', async (req, res) => {
+  const { name, number, dob, city } = req.body;
+  const patientCount = await Patient.countDocuments();
 
-		await Patient.create({
-			name: name,
-			number: number,
-			dob: dob,
-			city: city,
-			roomNo: roomNo
-		});
+  if (patientCount < availableBeds) {
+    const roomNo = patientCount + 1;
 
-		const patients = await Patient.find();
-		res.render("home", {
-			data: patients
-		});
-	}
-	else {
-		res.send("No room available");
-	}
-})
+    await Patient.create({ name, number, dob, city, roomNo });
+
+    const patients = await Patient.find();
+    res.render('home', { data: patients });
+  } else {
+    res.send('No room available');
+  }
+});
 
 app.post('/discharge', async (req, res) => {
-	var name = req.body.name;
+  const { name } = req.body;
 
-	try {
-		await Patient.findOneAndDelete({ name: name });
-		const patients = await Patient.find();
-		res.render("home", {
-			data: patients
-		})
-	} catch (err) {
-		console.log(err);
-		res.send("An error occurred while discharging the patient");
-	}
-})
+  try {
+    await Patient.findOneAndDelete({ name });
+    const patients = await Patient.find();
+    res.render('home', { data: patients });
+  } catch (err) {
+    console.log(err);
+    res.send('An error occurred while discharging the patient');
+  }
+});
 
 app.get('/login', (req, res) => {
-	res.render('login', { message: '' });
+  res.render('login', { message: '' });
 });
 
 app.post('/login', async (req, res) => {
-	const username = req.body.username;
-	const password = req.body.password;
+  const { username, password } = req.body;
 
-	const user = await User.findOne({ username: username, password: password });
-	if (!user) {
-		res.send('Invalid username or password');
-	} else {
-		req.session.userType = user.userType;
-		res.redirect('/');
-	}
+  const user = await User.findOne({ username, password });
+
+  if (!user) {
+    res.send('Invalid username or password');
+  } else {
+    req.session.userType = user.userType;
+    res.redirect('/');
+  }
 });
 
-// Logout route
 app.get('/logout', (req, res) => {
-	req.session.destroy();
-	res.redirect('/');
+  req.session.destroy();
+  res.redirect('/');
 });
 
 app.listen(3000, () => {
-	console.log("App is running on port 3000")
-})
+  console.log('App is running on port 3000');
+});
