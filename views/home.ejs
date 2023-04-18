@@ -90,6 +90,9 @@
 								<td><%= patient.dob %></td>
 								<td><%= patient.city %></td>
 								<td>
+									<form action="/update/<%= patient._id %>" method="get" style="display: inline-block;">
+										<button class="btn btn-primary" type="submit">Update</button>
+									</form>
 									<form method="POST" action="/discharge">
 										<input type="hidden" name="name" value="<%= patient.name %>">
 										<button type="submit" class="btn btn-danger btn-sm">Discharge</button>
