@@ -128,12 +128,13 @@ app.get('/update/:id', async (req, res) => {
       return res.send('Patient not found');
     }
 
-    res.render('update', { data: patient });
+    res.render('update', { patient: patient });
   } catch (err) {
     console.log(err);
-    res.send('An error occurred while fetching patient data');
+    res.send('An error occurred while fetching the patient');
   }
 });
+
 
 app.post('/update/:id', async (req, res) => {
   const { name, number, dob, city } = req.body;
