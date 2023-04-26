@@ -7,23 +7,23 @@ const session = require('express-session');
 const Patient = require('./models/patient');
 const User = require('./models/user');
 
-const availableBeds = 2;
+const availableBeds = 50;
 
 mongoose.set('strictQuery', true);
 
-async function main() {
+async function connectToDB() {
   try {
     await mongoose.connect('mongodb://localhost:27017/hospital', {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });
-    console.log("Connection Open");
+    console.log('Connected to database');
   } catch (err) {
     console.log(err);
   }
 }
 
-main();
+connectToDB();
 
 app.set('view engine', 'ejs');
 app.use(express.static(`${__dirname}/public`));
@@ -39,7 +39,7 @@ app.use(session({
 
 // Login route
 app.get('/login', (req, res) => {
-  res.render('login', { message: '' }); // define the "message" variable as an empty string
+  res.render('login', { message: '' });
 });
 
 app.post('/login', async (req, res) => {
@@ -48,12 +48,7 @@ app.post('/login', async (req, res) => {
   try {
     const user = await User.findOne({ username });
 
-    if (!user) {
-      const message = 'Invalid username or password';
-      return res.render('login', { message });
-    }
-
-    if (user.password !== password) {
+    if (!user || user.password !== password) {
       const message = 'Invalid username or password';
       return res.render('login', { message });
     }
@@ -67,6 +62,17 @@ app.post('/login', async (req, res) => {
   }
 });
 
+// Logout route
+app.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect('/login');
+    }
+  });
+});
+
 
 // Homepage route
 app.get('/', async (req, res) => {
@@ -78,12 +84,19 @@ app.get('/', async (req, res) => {
     const patients = await Patient.find();
     const userType = req.session.userType;
 
-    res.render('home', { data: patients, userType });
+    if (userType === 'admin') {
+      res.render('adminHome', { data: patients });
+    } else if (userType === 'user') {
+      res.render('userHome', { data: patients });
+    } else {
+      res.send('Invalid user type');
+    }
   } catch (err) {
     console.log(err);
     res.send('An error occurred while fetching patients');
   }
 });
+
 app.post('/', async (req, res) => {
   const { name, number, dob, city } = req.body;
   const patientCount = await Patient.countDocuments();
@@ -96,7 +109,7 @@ app.post('/', async (req, res) => {
     const patients = await Patient.find();
     const userType = req.session.userType;
 
-    res.render('home', { data: patients, userType });
+    res.render('adminHome', { data: patients, userType });
   } else {
     res.send('No room available');
   }
@@ -108,7 +121,7 @@ app.post('/discharge', async (req, res) => {
   try {
     await Patient.findOneAndDelete({ name });
     const patients = await Patient.find();
-    res.render('home', { data: patients });
+    res.render('adminHome', { data: patients });
   } catch (err) {
     console.log(err);
     res.send('An error occurred while discharging the patient');
@@ -128,24 +141,22 @@ app.get('/update/:id', async (req, res) => {
       return res.send('Patient not found');
     }
 
-    res.render('update', { patient: patient });
+    res.render('update', { patient });
   } catch (err) {
     console.log(err);
     res.send('An error occurred while fetching the patient');
   }
 });
 
-
 app.post('/update/:id', async (req, res) => {
   const { name, number, dob, city } = req.body;
+  const patient = await Patient.findById(req.params.id);
+
+  if (!patient) {
+    return res.send('Patient not found');
+  }
 
   try {
-    const patient = await Patient.findById(req.params.id);
-
-    if (!patient) {
-      return res.send('Patient not found');
-    }
-
     patient.name = name;
     patient.number = number;
     patient.dob = dob;
@@ -156,13 +167,12 @@ app.post('/update/:id', async (req, res) => {
     const patients = await Patient.find();
     const userType = req.session.userType;
 
-    res.render('home', { data: patients, userType });
+    res.render('adminHome', { data: patients, userType });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.send('An error occurred while updating patient data');
   }
 });
-
 
 
 app.listen(3000, () => {

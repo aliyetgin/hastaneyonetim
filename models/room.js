@@ -1,12 +1,22 @@
 const mongoose = require('mongoose');
 
-// Define a room schema and model using Mongoose
 const roomSchema = new mongoose.Schema({
-    roomNumber: Number,
-    capacity: Number,
-    patients: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Patient' }]
-  });
-  
+  roomNo: {
+    type: Number,
+    required: true
+  },
+  capacity: {
+    type: Number,
+    required: true,
+    default: 2
+  },
+  totalBeds: {
+    type: Number,
+    required: true,
+    default: 2
+  }
+});
+
   const Room = mongoose.model('Room', roomSchema);
 
   module.exports = Room;

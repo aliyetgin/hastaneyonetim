@@ -1,13 +1,21 @@
 const mongoose = require('mongoose');
 
 const patientSchema = new mongoose.Schema({
-  name: String,
-  number: String,
-  dob: String,
-  city: String,
-  roomNo: Number
+  name: { type: String, required: true },
+  number: { type: String, required: true },
+  dob: {
+    type: Date,
+    required: true,
+    get: function(value) {
+      return value.toLocaleDateString('en-US', {
+        day: 'numeric',
+        weekday: 'short',
+        month: 'long',
+        year: 'numeric'
+      });
+    }
+  },
+  city: { type: String, required: true },
+  roomNo: { type: Number, required: true },
 });
-
-const Patient = mongoose.model('Patient', patientSchema);
-
-module.exports = Patient;
+module.exports = mongoose.model('Patient', patientSchema);
