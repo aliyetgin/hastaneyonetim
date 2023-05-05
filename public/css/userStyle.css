@@ -1,0 +1,276 @@
+/* Custom CSS for Hospital Management System */
+body {
+  font-family: 'Roboto', sans-serif !important;
+  margin: 0;
+  padding: 0;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  padding: 0 10px;
+  height: 80px;
+}
+
+.navbar-brand {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0080ff;
+}
+
+.navbar-brand i {
+  font-size: 36px;
+}
+
+.navbar-toggler-icon {
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><path stroke="rgba(0, 0, 0, 0.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/></svg>');
+}
+
+.nav-item {
+  margin-right: 10px;
+}
+
+.nav-link {
+  font-size: 18px;
+  font-weight: 500;
+  color: #444;
+}
+
+.nav-link:hover {
+  color: #0080ff;
+}
+
+/* Jumbotron */
+.jumbotron {
+  background-color: #0080ff;
+  color: #fff;
+  height: 500px;
+  background-position: center;
+  background-size: cover;
+}
+
+.jumbotron h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-top: 120px;
+}
+
+.jumbotron p {
+  font-size: 24px;
+  font-weight: 500;
+  margin-top: 40px;
+}
+
+.jumbotron a.btn-primary {
+  margin-top: 40px;
+  padding: 15px 40px;
+  font-size: 24px;
+  font-weight: 700;
+  background-color: #fff;
+  color: #0080ff;
+  border: 2px solid #0080ff;
+  border-radius: 50px;
+}
+
+.jumbotron a.btn-primary:hover {
+  background-color: #0080ff;
+  color: #fff;
+}
+
+/* Services */
+#services {
+  margin-top: 80px;
+}
+
+#services h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.card {
+  border: none;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 30px rgba(0, 0, 0, .15);
+}
+
+.card h4 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.card p {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.user {
+  text-align: right;
+}
+
+/* About */
+#about {
+  margin-top: 80px;
+}
+
+#about h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+#about p {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-bottom: 30px;
+}
+
+.about-img {
+  background-image: url('about.jpg');
+  background-size: cover;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-img h3 {
+  font-size: 24px;
+  font-weight: 500;
+  color: #fff;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+}
+
+/* Doctors */
+#doctors {
+  margin-top: 80px;
+}
+
+#doctors h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.doctor-img {
+  height: 300px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.doctor-img img {
+  height: 100%;
+  transition: all 0.2s ease-in-out;
+}
+
+.doctor-img img:hover {
+  transform: scale(1.1);
+}
+
+/* Contact */
+#contact {
+  margin-top: 80px;
+}
+
+#contact h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.form-control {
+  border-radius: 0;
+  border: none;
+  border-bottom: 2px solid #0080ff;
+  box-shadow: none;
+}
+
+.form-control:focus {
+  border-color: #0080ff;
+  box-shadow: none;
+}
+
+.btn-primary {
+  background-color: #0080ff;
+  border-color: #0080ff;
+  border-radius: 50px;
+  padding: 15px 40px;
+  font-size: 24px;
+  font-weight: 700;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: #fff;
+  color: #0080ff;
+}
+
+/* Footer */
+#footer {
+  background-color: #f8f8f8;
+  padding: 40px 0;
+}
+
+.footer-widget h4 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.footer-widget ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-widget li {
+  margin-bottom: 10px;
+}
+
+.footer-widget a {
+  color: #444;
+}
+
+.footer-social ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-social li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.footer-social a i {
+  font-size: 24px;
+  color: #444;
+}
+
+.footer-social a i:hover {
+  color: #0080ff;
+}
+
+.footer-flex {
+  justify-content: center;
+}

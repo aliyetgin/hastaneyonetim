@@ -1,0 +1,45 @@
+/* loginStyle.css */
+
+.card {
+    border: none;
+}
+
+.card-header {
+    background-color: #f7f7f7;
+    border-bottom: none;
+}
+
+.form {
+    margin-bottom: 0;
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.btn-success:active,
+.btn-success:focus {
+    box-shadow: none;
+}
+
+@media screen and (max-width: 576px) {
+
+    .card {
+        margin-top: 30%;
+    }
+
+    .btn-success {
+        width: 100%;
+    }
+
+}

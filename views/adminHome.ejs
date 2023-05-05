@@ -1,97 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Hospital Management System</title>
-		<link rel="stylesheet" href="css/style.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	</head>
-	<body>
-		<header>
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			  <a class="navbar-brand" href="#">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Hospital Management System</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="#">
 				<i class="fa-solid fa-hospital fa-2x text-primary"></i>
 				<span class="ml-2" style="font-size: 1.5rem; font-weight: bold;">Hospital Management System</span>
-			  </a>
-			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
-			  </button>
-			  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+			</button>
+			<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
 				<ul class="navbar-nav">
-				  <li class="nav-item">
-					<a class="nav-link" href="/logout">Logout</a>
-				  </li>
+					<li class="nav-item">
+						<a class="nav-link" href="/logout">Logout</a>
+					</li>
 				</ul>
-			  </div>
-			</nav>
-		  </header>
-		  
-		<div class="container">
-	
-			<form class="mb-4" method="POST" action="/">
-				<div class="form-group">
-					<label for="name">Name</label>
-					<input type="text" class="form-control" name="name" placeholder="Enter patient name" required>
-				</div>
-				<div class="form-group">
-					<label for="number">Phone Number</label>
-					<input type="tel" class="form-control" name="number" placeholder="Enter phone number" pattern="[0-9]{10}" required>
-				</div>
-				<div class="form-group">
-					<label for="dob">Date of Birth</label>
-					<input type="date" class="form-control" name="dob" required>
-				</div>
-				<div class="form-group">
-					<label for="city">City</label>
-					<input type="text" class="form-control" name="city" placeholder="Enter city name" required>
-				</div>
-				<button type="submit" class="btn btn-success">Admit Patient</button>
-			</form>
-	
+			</div>
+		</nav>
+	</header>
 
-			<% if (data.length > 0) { %>
-				<div class="table-responsive">
-					<table class="table table-striped">
-						<thead>
+	<div class="container">
+
+		<form class="mb-4" method="POST" action="/">
+			<div class="form-group">
+				<label for="name">Name</label>
+				<input type="text" class="form-control" name="name" placeholder="Enter patient name" required>
+			</div>
+			<div class="form-group">
+				<label for="number">Phone Number</label>
+				<input type="tel" class="form-control" name="number" placeholder="Enter phone number"
+					pattern="[0-9]{10}" required>
+			</div>
+			<div class="form-group">
+				<label for="dob">Date of Birth</label>
+				<input type="date" class="form-control" name="dob" required>
+			</div>
+			<div class="form-group">
+				<label for="city">City</label>
+				<input type="text" class="form-control" name="city" placeholder="Enter city name" required>
+			</div>
+			<button type="submit" class="btn btn-success">Admit Patient</button>
+		</form>
+
+
+		<% if (data.length> 0) { %>
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Room No.</th>
+							<th>Name</th>
+							<th>Phone Number</th>
+							<th>Date of Birth</th>
+							<th>City</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<% data.forEach(patient=> { %>
 							<tr>
-								<th>Room No.</th>
-								<th>Name</th>
-								<th>Phone Number</th>
-								<th>Date of Birth</th>
-								<th>City</th>
-								<th></th>
+								<td>
+									<%= patient.roomNo %>
+								</td>
+								<td>
+									<%= patient.name %>
+								</td>
+								<td>
+									<%= patient.number %>
+								</td>
+								<td>
+									<%= patient.dob %>
+								</td>
+								<td>
+									<%= patient.city %>
+								</td>
+								<td class="btn-container">
+									<form class="patient-btn" action="/update/<%= patient._id %>" method="get">
+										<button class="btn btn-primary btn-sm" type="submit">Update</button>
+									</form>
+									<form class="patient-btn" method="POST" action="/discharge">
+										<input type="hidden" name="name" value="<%= patient.name %>">
+										<button type="submit" class="btn btn-danger btn-sm">Discharge</button>
+									</form>
+								</td>
 							</tr>
-						</thead>
-						<tbody>
-							<% data.forEach(patient => { %>
-								<tr>
-									<td><%= patient.roomNo %></td>
-									<td><%= patient.name %></td>
-									<td><%= patient.number %></td>
-									<td><%= patient.dob %></td>
-									<td><%= patient.city %></td>
-									<td class="btn-container">
-										<form class="patient-btn" action="/update/<%= patient._id %>" method="get">
-											<button class="btn btn-primary btn-sm" type="submit">Update</button>
-										</form>
-										<form class="patient-btn" method="POST" action="/discharge">
-											<input type="hidden" name="name" value="<%= patient.name %>">
-											<button type="submit" class="btn btn-danger btn-sm">Discharge</button>
-										</form>
-									</td>									
-								</tr>
 							<% }) %>
-						</tbody>
-					</table>
-				</div>
+					</tbody>
+				</table>
+			</div>
 			<% } else { %>
 				<p>No patients admitted yet.</p>
-			<% } %>
+				<% } %>
 	</div>
-    <script src="https://kit.fontawesome.com/a6dd37e455.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/a6dd37e455.js" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 <footer class="mt-5 py-3 text-center">
