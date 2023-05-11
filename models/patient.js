@@ -6,7 +6,7 @@ const patientSchema = new mongoose.Schema({
   dob: {
     type: Date,
     required: true,
-    get: function(value) {
+    get: function (value) {
       return value.toLocaleDateString('en-US', {
         day: 'numeric',
         weekday: 'short',

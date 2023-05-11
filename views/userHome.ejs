@@ -15,47 +15,44 @@
 </head>
 
 <body>
-
-  <div class="container-fluid no-padding">
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid header-container">
-          <a class="navbar-brand" href="/">
-            <i class="fas fa-hospital fa-2x text-primary"></i>
-            <span class="ms-2 fs-4 fw-bold">Hospital Management System</span>
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="/appointments">Appointments</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#services">Services</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#about">About Us</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#contact">Contact Us</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/logout">Logout</a>
-              </li>
-            </ul>
-          </div>
+  <div class="container-fluid p-0">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid header-container">
+        <a class="navbar-brand" href="/">
+          <i class="fas fa-hospital fa-2x text-primary"></i>
+          <span class="ms-2 fs-4 fw-bold">Hospital Management System</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/appointments">Appointments</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#services">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
+          </ul>
         </div>
-      </nav>
-    </header>
+      </div>
+    </nav>
 
 
 
     <main>
 
-      <section class="jumbotron jumbotron-fluid" style="background-image: url('images/jumbotron.jpg');">
+      <section class="jumbotron" style="background-image: url('images/jumbotron.jpg');">
         <div class="container">
           <h1 class="display-4">Welcome to Our Hospital</h1>
           <p class="lead">We provide high-quality medical care and services to our patients. Our hospital has
@@ -63,119 +60,128 @@
             every patient.</p>
           <a class="btn btn-primary btn-lg" href="#" role="button">Book an Appointment</a>
         </div>
+        <img src="images/jumbotron.jpg" alt="doctor prepares by wearing his glove" style="display:none;">
       </section>
+
 
       <div class="container" id="services">
         <h2 class="mb-3">Our Services</h2>
         <div class="row">
-          <div class="col-md-4 mb-4">
-            <div class="card shadow-sm h-100">
-              <div class="card-body">
-                <h4 class="card-title">Emergency Care</h4>
-                <p class="card-text">Our emergency department is staffed by highly trained medical professionals who are
-                  available 24/7 to provide care for patients in need of urgent medical attention.</p>
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card mb-3 shadow-sm h-100">
+              <div class="card-body text-center">
+                <h4 class="fw-bold">Emergency Care</h4>
+                <p class="mb-0">Our emergency department is staffed by highly trained medical professionals who are
+                  available
+                  24/7 to provide care for patients in need of urgent medical attention.</p>
               </div>
             </div>
           </div>
-          <div class="col-md-4 mb-4">
-            <div class="card shadow-sm h-100">
-              <div class="card-body">
-                <h4 class="card-title">Inpatient Care</h4>
-                <p class="card-text">Our hospital provides comprehensive inpatient care for patients who require a
-                  hospital stay for surgery, medical treatment, or other health-related issues.</p>
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card mb-3 shadow-sm h-100">
+              <div class="card-body text-center">
+                <h4 class="fw-bold">Inpatient Care</h4>
+                <p class="mb-0">Our hospital provides comprehensive inpatient care for patients who require a hospital
+                  stay for
+                  surgery, medical treatment, or other health-related issues.</p>
               </div>
             </div>
           </div>
-          <div class="col-md-4 mb-4">
-            <div class="card shadow-sm h-100">
-              <div class="card-body">
-                <h4 class="card-title">Outpatient Care</h4>
-                <p class="card-text">We offer a wide range of outpatient services, including diagnostic testing, medical
-                  consultations, and follow-up care for patients who do not require an overnight stay in the hospital.
-                </p>
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card mb-3 shadow-sm h-100">
+              <div class="card-body text-center">
+                <h4 class="fw-bold">Outpatient Care</h4>
+                <p class="mb-0">We offer a wide range of outpatient services, including diagnostic testing, medical
+                  consultations,
+                  and follow-up care for patients who do not require an overnight stay in the hospital.</p>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <section id="about">
+
+      <section id="about">
+        <div class="container">
+          <h2 class="mb-3">About Us</h2>
+          <p>Our hospital is committed to providing the highest quality medical care and services to our patients. We
+            have state-of-the-art equipment and facilities, and our staff is dedicated to providing compassionate and
+            personalized care to every patient.</p>
+          <p>Our hospital provides a wide range of services to meet the needs of our patients, including emergency
+            care, inpatient care, and outpatient care. Our team of highly qualified and experienced healthcare
+            professionals includes doctors, nurses, medical technicians, therapists, and support staff, all working
+            together to provide the best possible care to our patients.</p>
+          <p>We believe that patient satisfaction is paramount, and we strive to ensure that every patient has a
+            positive experience when visiting our hospital. We are committed to continuous improvement, and we welcome
+            feedback from our patients to help us enhance the quality of our services.</p>
+          <p>Thank you for choosing our hospital for your healthcare needs. We look forward to serving you.</p>
+        </div>
+
+
+        <section id="testimonials" class="py-5">
           <div class="container">
-            <h2 class="mb-3">About Us</h2>
-            <p>Our hospital is committed to providing the highest quality medical care and services to our patients. We
-              have state-of-the-art equipment and facilities, and our staff is dedicated to providing compassionate and
-              personalized care to every patient.</p>
-            <p>Our hospital provides a wide range of services to meet the needs of our patients, including emergency
-              care, inpatient care, and outpatient care. Our team of highly qualified and experienced healthcare
-              professionals includes doctors, nurses, medical technicians, therapists, and support staff, all working
-              together to provide the best possible care to our patients.</p>
-            <p>We believe that patient satisfaction is paramount, and we strive to ensure that every patient has a
-              positive experience when visiting our hospital. We are committed to continuous improvement, and we welcome
-              feedback from our patients to help us enhance the quality of our services.</p>
-            <p>Thank you for choosing our hospital for your healthcare needs. We look forward to serving you.</p>
-          </div>
-
-
-          <section id="testimonials" class="py-5">
-            <div class="container">
-              <h2 class="text-center mb-5">Testimonials</h2>
-              <div class="row">
-                <div class="col-md-4 mb-4">
-                  <div class="card h-100 border-0 shadow">
-                    <div class="card-body">
-                      <p class="card-text">"I had a great experience at this hospital. The staff was very attentive and
-                        caring."</p>
-                    </div>
-                    <div class="card-footer">
-                      <div class="user">
-                        <strong>John Doe</strong>
-                        <span class="occupation">Patient</span>
-                      </div>
+            <h2 class="text-center mb-5">Testimonials</h2>
+            <div class="row">
+              <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow">
+                  <div class="card-body">
+                    <p class="card-text">"I had a great experience at this hospital. The staff was very attentive and
+                      caring."</p>
+                  </div>
+                  <div class="card-footer">
+                    <div class="user">
+                      <strong>John Doe</strong>
+                      <span class="occupation">Patient</span>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                  <div class="card h-100 border-0 shadow">
-                    <div class="card-body">
-                      <p class="card-text">"The doctors and nurses were very knowledgeable and helpful. I felt like I
-                        was in good hands."</p>
-                    </div>
-                    <div class="card-footer">
-                      <div class="user">
-                        <strong>Jane Doe</strong>
-                        <span class="occupation">Patient</span>
-                      </div>
+              </div>
+              <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow">
+                  <div class="card-body">
+                    <p class="card-text">"The doctors and nurses were very knowledgeable and helpful. I felt like I
+                      was in good hands."</p>
+                  </div>
+                  <div class="card-footer">
+                    <div class="user">
+                      <strong>Jane Doe</strong>
+                      <span class="occupation">Patient</span>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                  <div class="card h-100 border-0 shadow">
-                    <div class="card-body">
-                      <p class="card-text">"I was impressed with how clean and organized the hospital was. It made me
-                        feel more comfortable during my stay."</p>
-                    </div>
-                    <div class="card-footer">
-                      <div class="user">
-                        <strong>John Smith</strong>
-                        <span class="occupation">Patient</span>
-                      </div>
+              </div>
+              <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow">
+                  <div class="card-body">
+                    <p class="card-text">"I was impressed with how clean and organized the hospital was. It made me
+                      feel more comfortable during my stay."</p>
+                  </div>
+                  <div class="card-footer">
+                    <div class="user">
+                      <strong>John Smith</strong>
+                      <span class="occupation">Patient</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
 
-          <h2 class="mb-3">Our Team</h2>
-          <p>Our hospital has a team of highly qualified and experienced healthcare professionals who are dedicated to
-            providing the best possible care to our patients. Our team includes:</p>
-          <ul class="list-unstyled mb-4">
-            <li>Doctors</li>
-            <li>Nurses</li>
-            <li>Medical technicians</li>
-            <li>Therapists</li>
-            <li>Support staff</li>
-          </ul>
+        <section id="team" class="py-5">
+          <div class="container">
+            <h2 class="mb-3">Our Team</h2>
+            <p>Our hospital has a team of highly qualified and experienced healthcare professionals who are dedicated to
+              providing the best possible care to our patients. Our team includes:</p>
+            <ul class="list-unstyled mb-4">
+              <li>Doctors</li>
+              <li>Nurses</li>
+              <li>Medical technicians</li>
+              <li>Therapists</li>
+              <li>Support staff</li>
+            </ul>
+          </div>
         </section>
 
 
@@ -197,7 +203,7 @@
 
     <footer class="bg-light py-3">
       <div class="container">
-        <div class="row footer-flex">
+        <div class="row d-flex">
           <div class="col-md-6 text-md-start">
             <p>&copy; 2023 Hospital Management System</p>
           </div>
